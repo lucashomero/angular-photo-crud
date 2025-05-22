@@ -1,7 +1,9 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, NgModel, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Moment } from '../../Moment';
+
 
 @Component({
   selector: 'app-moment-form',
@@ -11,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './moment-form.component.css'
 })
 export class MomentFormComponent {
+  @Output() onSubmit = new EventEmitter<Moment>()
+   
   @Input() btnText!: string;
 
   momentForm!: FormGroup
@@ -32,10 +36,19 @@ export class MomentFormComponent {
     return this.momentForm.get('title')!
   }
 
+  onFileSelected(event: any){
+    const file: File = event.target.files[0];
+
+    this.momentForm.patchValue({ image: file })
+  }
+
   submit(){
     if(this.momentForm.invalid){
-      return 
+      return;
     }
-    console.log("Enviou o formulário")
+
+    console.log(this.momentForm.value)
+    
+    this.onSubmit.emit(this.momentForm.value)
   }
 }

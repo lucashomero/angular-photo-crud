@@ -9,5 +9,10 @@ import { MomentFormComponent } from '../../moment-form/moment-form.component';
   styleUrl: './new-moment.component.css'
 })
 export class NewMomentComponent {
-  btnText = "Compartilhar"
+  btnText = "Compartilhar!"
+
+  createHandler(event: any) {
+
+  }
+
 }
