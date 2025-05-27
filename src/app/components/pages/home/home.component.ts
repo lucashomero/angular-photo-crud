@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MomentFormComponent } from '../../moment-form/moment-form.component';
 import { NewMomentComponent } from '../new-moment/new-moment.component';
 import { Moment } from '../../../Moment';
@@ -8,12 +8,12 @@ import { MomentService } from '../../../services/moment.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, MomentFormComponent, NewMomentComponent, CommonModule],
+  imports: [RouterOutlet, MomentFormComponent, NewMomentComponent, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
