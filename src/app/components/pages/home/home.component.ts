@@ -9,11 +9,12 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, MomentFormComponent, NewMomentComponent, CommonModule, RouterModule],
+  imports: [RouterOutlet, MomentFormComponent, NewMomentComponent, CommonModule, RouterModule, FontAwesomeModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -23,6 +24,8 @@ export class HomeComponent {
   moments: Moment[] = []
   baseApiUrl = environment.baseApiUrl
 
+  faSearch = faSearch
+  searchTerm: string = '';
   // to do search
 
   constructor(private momentService: MomentService){}
@@ -39,4 +42,12 @@ export class HomeComponent {
     });
   }
 
+  search(e: Event): void{
+    const target = e.target as HTMLInputElement;
+    const value = target.value;
+    
+    this.moments = this.allMoments.filter((moment)=>{
+      return moment.title.toLowerCase().includes(value);
+    });
+  }
 }
